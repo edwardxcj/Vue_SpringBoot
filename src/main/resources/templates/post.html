@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/post.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="../static/js/ajax.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="topbar">
+        <div id="topbarNav">
+            <div class="topbarNav-left">
+                <ul class="quickNav">
+                    <li class="homepage">
+                        <a href="http://localhost:8080/#/home">homepage</a>
+                    </li>
+                    <li class="line">|</li>
+                    <li>
+                        <a href="http://localhost:8080/#/profile">personal center</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="topbarNav-right">
+                welcome
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="website-name">
+            <a href="../#/home">
+                <img src="../static/images/sport.jpg" alt="Home" width="60px" height="50px">
+            </a>
+
+        </div>
+        <div class="mainNav">
+            <div class="nav">
+                <div class="nav-ul">
+                    <ul class="nav-item">
+                        <li>
+                            <a href="http://localhost:8080/#/home">Homepage</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/Posts">Community</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="subnav">
+                <div class="subnav-ul">
+                    <ul class="nav-item">
+                        <li>
+                            <a href="http://localhost:8080/#/League/MLB">MLB</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/League/NBA">NBA</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/League/NFL">NFL</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/League/NCAAF">NCAAF</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/League/NHL">NHL</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post">
+        <div class="post_content">
+            <div class="nav">
+                <section class="sec">
+                    <span>
+                        <a href="../#/Posts">community</a>
+                        <i> > </i>
+                        <a th:text="${post1234.gameType}"></a>
+                    </span>
+                </section>
+            </div>
+            <div class="post_title">
+                <h1 th:text="${post1234.title}" class="h1_title">title</h1>
+            </div>
+            <div class="content_block">
+                <div class="content">
+                    <div class="post_user" th:text="'author: '+ ${post1234.userName}">
+                    </div>
+                    <p> </p>
+                    <div class="main-post">
+                        <div class="detail">
+                            <div class="dom" th:text="${post1234.content}">
+                            </div>
+                        </div>
+                        <div class="button-list">
+                            <div class="button">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-post" th:text="${post1234.comment}">
+
+            </div>
+            <div class="reply">
+                <div class="reply_title">
+                    <span class="reply_title_text">Re: title</span>
+                </div>
+                <div class="reply_container">
+                    <a></a>
+                    <div class="title_new_post">title</div>
+                    <textarea id="title_area" cols="40"></textarea>
+                    <input type="hidden" id="gameType" th:value="${post1234.gameType}">
+                    <div class="reply_editor">
+                        <div class="reply_editor_input">
+                            <textarea name="reply_editor" id="reply_textarea" cols="80" rows="10"></textarea>
+                        </div>
+                        <div class="reply_button">
+                            <button class="release_button">
+                                reply
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="game_comment_box">
+            <div class="block">
+            </div>
+            <div class="comment_box">
+                <div class="title">
+                    <img src="../static/images/sport.jpg" alt="s" height="40" width="40">
+                    community
+                </div>
+                <ul>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist1.postId})}" th:text="${postlist1.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist2.postId})}" th:text="${postlist2.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist3.postId})}" th:text="${postlist3.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist4.postId})}" th:text="${postlist4.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist5.postId})}" th:text="${postlist5.title}">123</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="comment_box">
+                <div class="title">
+                    <img src="../static/images/sport.jpg" alt="s" height="40" width="40">
+                    community 2
+                </div>
+                <ul>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist1.postId})}" th:text="${postlist1.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist2.postId})}" th:text="${postlist2.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist3.postId})}" th:text="${postlist3.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist4.postId})}" th:text="${postlist4.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist5.postId})}" th:text="${postlist5.title}">123</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

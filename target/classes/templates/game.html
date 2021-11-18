@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/game.css">
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/js/detail.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="topbar">
+        <div id="topbarNav">
+            <div class="topbarNav-left">
+                <ul class="quickNav">
+                    <li class="homepage">
+                        <a href="http://localhost:8080/#/home">homepage</a>
+                    </li>
+                    <li class="line">|</li>
+                    <li>
+                        <a href="http://localhost:8080/#/profile">personal center</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="topbarNav-right">
+                welcome
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="website-name">
+            <a href="../#/home">
+                <img src="../static/images/sport.jpg" alt="Home" width="60px" height="50px">
+            </a>
+        </div>
+        <div class="mainNav">
+            <div class="nav">
+                <div class="nav-ul">
+                    <ul class="nav-item">
+                        <li>
+                            <a href="http://localhost:8080/#/home">Homepage</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/Posts">Community</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="subnav">
+                <div class="subnav-ul">
+                    <ul class="nav-item">
+                        <li>
+                            <a href="http://localhost:8080/#/League/MLB">MLB</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/League/NBA">NBA</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/League/NFL">NFL</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/League/NCAAF">NCAAF</a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="http://localhost:8080/#/League/NHL">NHL</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="game_live">
+        <div class="table_list">
+            <div class="table_list_c">
+                <div class="table">
+                    <ul>
+                        <li th:each="gamelist:${gslist}">
+                            <a  th:href="@{/game-session/gameDetail(gameId=${gamelist.gameId})}">
+                                <p th:text="${gamelist.league}">monday</p>
+                                <div class="team">
+                                    <span class="name" th:text="${gamelist.away}">10-04</span>
+                                </div>
+                                <div class="vs"  th:if="${gamelist.gameResult} ne 'away:home'" th:text="${gamelist.gameResult}">vs</div>
+                                <div class="team2">
+                                    <span class="name" th:text="${gamelist.home}">1 game</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="game_live_content">
+            <div class="game_box">
+                <div class="team_vs">
+                    <div class="team_vs_box">
+                        <div class="game_information" th:text="'Game time: '+${gameSession.gameTime}+'     League :'+${gameSession.league}"></div>
+                        <div class="team_a">
+                            <div class="message">
+                                <div>Guest Team</div>
+                                <p th:text="${gameSession.away}">team_a name</p>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="vs"  th:if="${gameSession.gameResult} ne 'away:home'" th:text="${gameSession.gameResult}">vs</div>
+                        <div class="team_b">
+                            <div class="message">
+                                <div> Home team</div>
+                                <p th:text="${gameSession.home}">team_b name</p>
+                                <div></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="info">
+                        <p style="display:none" class="none_gameid" th:text="${gameSession.gameId}"></p>
+                        <p style="display:none" class="none_gameResult" th:text="${gameSession.gameResult}">vs</p>
+                    </div>
+                </div>
+            </div>
+            <div class="data_box"></div>
+            <div class="predict_box">
+                <div class="predict_title">
+                    <i class="predict_key">prediction</i>
+                    <div class="title_name">the winner is</div>
+                </div>
+                <div class="predict_list">
+                    <span class="team_a_button">
+                        <i th:text="${gameSession.away}">team1</i>
+                        <b th:if="${gameSession.gameResult} == 'away:home'" th:text="${#strings.substringAfter(#strings.arraySplit(gameSession.oddsInformation,',')[0],'[')}">1.00</b>
+                    </span>
+                    <span class="team_b_button">
+                        <i th:text="${gameSession.home}">team2</i>
+                         <b th:if="${gameSession.gameResult} == 'away:home'" th:text="${#strings.substringBefore(#strings.arraySplit(gameSession.oddsInformation,',')[length],']')}">1.00</b>
+                    </span>
+                </div>
+            </div>
+            <div class="predict_box">
+                <div class="predict_title">
+                    <i class="predict_key">prediction</i>
+                    <div class="title_name">the loser is</div>
+                </div>
+                <div class="predict_list">
+                    <span class="team_a_button">
+                        <i th:text="${gameSession.home}">team1</i>
+                        <b>2.00</b>
+                    </span>
+
+                    <span class="team_b_button">
+                        <i th:text="${gameSession.away}">team2</i>
+                        <b>2.00</b>
+                    </span>
+                </div>
+            </div>
+            <div class="predict_box">
+                <div class="predict_title">
+                    <i class="predict_key">prediction</i>
+                    <div class="title_name">the First-half winner is</div>
+                </div>
+                <div class="predict_list">
+                    <span class="team_a_button">
+                        <i th:text="${gameSession.home}">team1</i>
+                        <b>2.00</b>
+                    </span>
+
+                    <span class="team_b_button">
+                        <i th:text="${gameSession.away}">team2</i>
+                        <b>2.00</b>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="game_comment_box">
+            <div class="block">
+            </div>
+            <div class="comment_box">
+                <div class="title">
+                    <img src="../static/images/sport.jpg" alt="s" height="40" width="40">
+                    Community
+                </div>
+                <ul>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist1.postId})}" th:text="${postlist1.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist2.postId})}" th:text="${postlist2.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist3.postId})}" th:text="${postlist3.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist4.postId})}" th:text="${postlist4.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist5.postId})}" th:text="${postlist5.title}">123</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="comment_box">
+                <div class="title">
+                    <img src="../static/images/sport.jpg" alt="s" height="40" width="40">
+                    Community 2
+                </div>
+                <ul>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist1.postId})}" th:text="${postlist1.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist2.postId})}" th:text="${postlist2.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist3.postId})}" th:text="${postlist3.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist4.postId})}" th:text="${postlist4.title}">123</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/post-info/post(postId=${postlist5.postId})}" th:text="${postlist5.title}">123</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="predict_window" style="display:none">
+        <div class="window">
+            <div class="window_head">
+                <b>prediction
+                    <i></i>
+                </b>
+                <span>title:</span>
+                <i style="cursor:pointer" class="window_button_1">close</i>
+            </div>
+            <div class="window_body">
+                <div class="item1">
+                    team1
+                </div>
+                <div class="item2">
+                    1.0
+                </div>
+                <div class="item3">
+                    <input type="number"  oninput="this.value = this.value.replace(/[^0-9]/g, '');" value="50" id="predict_number">
+                    <i class="window_button_2">predict</i>
+                    <p class="item3_win">you can win :</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>
+</html>

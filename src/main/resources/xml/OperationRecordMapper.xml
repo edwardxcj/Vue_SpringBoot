@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elec.dal.mapper.OperationRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.elec.dal.pojo.OperationRecord">
+        <id column="id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="user_id" property="userId" />
+        <result column="operation_id" property="operationId" />
+        <result column="paid_scores" property="paidScores" />
+        <result column="received_scores" property="receivedScores" />
+        <result column="game_session" property="gameSession" />
+        <result column="odds_information" property="oddsInformation" />
+        <result column="operation_status" property="operationStatus" />
+        <result column="comment" property="comment" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_name, user_id, operation_id, paid_scores, received_scores, game_session, odds_information, operation_status, comment, gmt_create, gmt_modified
+    </sql>
+
+</mapper>

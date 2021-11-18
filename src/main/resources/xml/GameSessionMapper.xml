@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elec.dal.mapper.GameSessionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.elec.dal.pojo.GameSession">
+        <id column="id" property="id" />
+        <result column="game_id" property="gameId" />
+        <result column="home" property="home" />
+        <result column="away" property="away" />
+        <result column="game_type" property="gameType" />
+        <result column="league" property="league" />
+        <result column="odds_information" property="oddsInformation" />
+        <result column="game_time" property="gameTime" />
+        <result column="game_result" property="gameResult" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, game_id, home, away, game_type, league, odds_information, game_time, game_result, gmt_create, gmt_modified
+    </sql>
+
+</mapper>
